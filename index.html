@@ -11,16 +11,47 @@
 </head>
 
 <body>
+    <!--Primary color here-->
+    <header>
+        <!--Search bar and side popout goes here-->
+        <div class="uk-flex uk-flex-center">
+            <form class="uk-search uk-search-default">
+                <a href="" uk-search-icon></a>
+                <input class="uk-search-input" type="search" placeholder="">
+            </form>
+            <button class="uk-button uk-button-default uk-margin-small-right" type="button"
+                uk-toggle="target: #offcanvas-usage">Search</button>
 
+            <div id="offcanvas-usage" uk-offcanvas>
+                <div class="uk-offcanvas-bar">
 
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+                    <!--insert the search bar value here-->
+                    <h3 id="scoresCityName">$City_Name_Variable_Here Score</h3>
 
+                    <p class="cityScores">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut
+                        labore
+                        et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip
+                        ex ea commodo consequat.</p>
 
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!--Events go here-->
+    </main>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
     <script src="assets/js/script.js"></script>
 </body>
 
