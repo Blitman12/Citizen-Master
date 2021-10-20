@@ -105,7 +105,7 @@ let displayData = (informationArr) => {
 
 searchButton.addEventListener("click", intialCall)
 
-
+// scoresContainerEl
 
 // HTML For This
 /* <form>
