@@ -9,13 +9,19 @@ let containerEl = document.createElement("div");
 
 let intialCall = (event) => {
     event.preventDefault()
+    containerEl.innerHTML = ""
     let searchedCity = selectedCity.value;
     fetch(`https://api.teleport.org/api/cities/?search=${searchedCity}`).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data)
-                geoId = data._embedded["city:search-results"][0]._links["city:item"].href
-                secondaryCall(geoId)
+                // Should this continue?
+                let shouldContinue = data._embedded["city:search-results"].length
+                if (shouldContinue > 0) {
+                    geoId = data._embedded["city:search-results"][0]._links["city:item"].href
+                    secondaryCall(geoId)
+                } else {
+                    alert("We do not yet have information on this city. Please check back later")
+                }
             })
         } else {
             alert("Error: Please ensure your spelling is correct or select another city")
@@ -31,8 +37,8 @@ let secondaryCall = () => {
     fetch(geoId).then(function(response) {
         if(response.ok) {
             response.json().then(function (data) {
+                // Should this continue? 
                 let shouldContinue = data._links["city:urban_area"] !== undefined
-                console.log(data._links["city:urban_area"] !== undefined)
                 if (shouldContinue) {
                     scoreFetchURL = data._links["city:urban_area"].href + "scores/"
                     finalCall()
@@ -49,6 +55,7 @@ let secondaryCall = () => {
         alert("Unable to connect to Teleport API")
     })
 }
+
 
 let finalCall = () => {
     fetch(scoreFetchURL).then(function (response) {
@@ -81,7 +88,6 @@ let displayData = (informationArr) => {
         let scoreSpan = document.createElement("span")
         let scoreBar = document.createElement("progress")
         let scoreRounded = Math.round(informationArr[i].score_out_of_10)
-        console.log(scoreRounded)
         
         nameEl.textContent = informationArr[i].name;
         scoreEl.textContent = "Score: ";
