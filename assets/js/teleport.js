@@ -66,6 +66,7 @@ let finalCall = () => {
     fetch(scoreFetchURL).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                console.log(data)
                 let information = data.categories
                 // Filtering unwanted information from array returned
                 let unWantedInformation = [2,3,4,6,11,12,13,15,16]
@@ -105,7 +106,14 @@ let displayData = (informationArr) => {
         scoreBar.setAttribute("max", 10)
         internalDiv.classList.add("uk-background-primary", "uk-light", "uk-padding", "uk-panel", "uk-margin-top", "uk-border-pill")
         containerEl.classList.add("uk-text-center")
-        scoreSpan.style.cssText = "color: " + informationArr[i].color + ";"
+        if (scoreRounded < 4) {
+            scoreSpan.style.cssText = "color: red;"
+        } else if (scoreRounded > 4 && scoreRounded < 7) {
+            scoreSpan.style.cssText = "color: orange;"
+        } else {
+            scoreSpan.style.cssText = "color: #65FF00;"
+        }
+        
 
         scoreEl.appendChild(scoreSpan)
         
