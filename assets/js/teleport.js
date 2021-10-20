@@ -106,9 +106,10 @@ let displayData = (informationArr) => {
         scoreBar.setAttribute("max", 10)
         internalDiv.classList.add("uk-background-primary", "uk-light", "uk-padding", "uk-panel", "uk-margin-top", "uk-border-pill")
         containerEl.classList.add("uk-text-center")
+        console.log(scoreRounded)
         if (scoreRounded < 4) {
             scoreSpan.style.cssText = "color: red;"
-        } else if (scoreRounded > 4 && scoreRounded < 7) {
+        } else if (scoreRounded >= 4 && scoreRounded < 7) {
             scoreSpan.style.cssText = "color: orange;"
         } else {
             scoreSpan.style.cssText = "color: #65FF00;"
