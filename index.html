@@ -11,14 +11,17 @@
 </head>
 
 <body>
-
     <!--Primary color here-->
-    <header>
+    <header uk-sticky>
         <!--Search bar and side popout goes here-->
         <div class="uk-flex uk-flex-center uk-margin-top">
-            <form class="uk-search uk-search-default">
-                <a href="" uk-search-icon></a>
-                <input class="uk-search-input" type="search" placeholder="">
+            <form class="uk-search uk-search-default" type="search">
+                <nav class="uk-navbar-container" uk-navbar>
+                    <div class="uk-navbar-left">
+                        <a href="" uk-search-icon></a>
+                        <input class="uk-search-input" type="search" placeholder="">
+                    </div>
+                </nav>
             </form>
             <button class="uk-button uk-button-default uk-margin-small-right" type="button"
                 uk-toggle="target: #offcanvas-usage">Search</button>
@@ -31,26 +34,62 @@
                     <h3 id="scoresCityName" class="uk-text-center">Phoenix</h3>
                     <hr class="uk-divider-icon">
                     <p class="cityScores">
-                     </p>
+                    </p>
 
                 </div>
             </div>
         </div>
     </header>
     <main>
-        <!--Events go here-->
+        <!--Search History should go here-->
+        <!--Toggleable when the input is active. Toggle display:none by default-->
+        <section id="searchBar" class=" uk-flex uk-flex-center">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+                <div id="1" class="uk-flex uk-flex-row uk-flex-between">
+                    <h3 class="uk-card-title">Search 1</h3>
+                    <!--on click do the search again-->
+                    <a href="" uk-search-icon></a>
+                </div>
+                <div id="2" class="uk-flex uk-flex-row uk-flex-between">
+                    <h3 class="uk-card-title">Search 2</h3>
+                    <!--on click do the search again-->
+                    <a href="" uk-search-icon></a>
+                </div>
+                <div id="3" class="uk-flex uk-flex-row uk-flex-between">
+                    <h3 class="uk-card-title">Search 3</h3>
+                    <!--on click do the search again-->
+                    <a href="" uk-search-icon></a>
+                </div>
+                <div id="4" class="uk-flex uk-flex-row uk-flex-between">
+                    <h3 class="uk-card-title">Search 4</h3>
+                    <!--on click do the search again-->
+                    <a href="" uk-search-icon></a>
+                </div>
+            </div>
+        </section>
+        <!--Events go here and need to be dynamically generated.-->
         <section id="events">
-
+            <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100"
+                class="uk-flex ul-flex-between uk-flex-column">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
         </section>
     </main>
+    <!--Footer slam this down to the bottom(i would use column mode in flex on the body and then space between? that might do it)-->
+    <footer class="uk-card-footer" id="footer">
+        <div class="uk-flex uk-flex-between">
+            <img alt="Citizen Master Logo/BigText" src="" />
+            <p>&copyCitizen Master</p>
+        </div>
+    </footer>
 
 
-    
-
-
-
-
-
+    <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
     <script src="assets/js/teleport.js"></script>
