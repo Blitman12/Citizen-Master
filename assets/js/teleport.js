@@ -179,7 +179,7 @@ let loadHistory = () => {
         return
     }
 
-
+    // Loops through the less than 6 localStorage array and creates buttons
     for (let i = 0; i < cityHistory.length; i++) {
         let historyButton = document.createElement("button")
         historyButton.setAttribute("class", "remove-me")
