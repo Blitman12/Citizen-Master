@@ -100,20 +100,22 @@ getEvents(page);
 
 
 
-
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
-function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI) {
+function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
 
-    if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI) {
+    if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
         //Create the body elements
         var Parent = document.querySelector('.panel-heading');
         var panelBody = document.createElement("div");
         var events = document.createElement("div");
+        var eventImage = document.createElement("img")
         var groupItem = document.createElement("a");
-        var groupItemHeading = document.createElement("h4")
+        var groupItemHeading = document.createElement("h4");
+        var eventInformationStyling = document.createElement("div");
         var groupItemText = document.createElement("p");
+        var eventPrice = document.createElement("p");
         var venue = document.createElement("p");
 
         //modifications
@@ -122,14 +124,22 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI) {
         events.setAttribute('id', 'events');
         events.setAttribute('class', 'list-group')
 
+        eventImage.setAttribute('src', eventImageURLAPI);
+        eventImage.setAttribute('class', 'uk-width-1-6');
+
         groupItem.setAttribute('href', eventURLAPI);
         groupItem.setAttribute('class', 'list-item-group');
 
         groupItemHeading.setAttribute('class', 'list-group-item-heading');
         groupItemHeading.textContent = eventTitleAPI;
 
-        groupItemText.setAttribute('class', 'list-group-item-text');
+        eventInformationStyling.setAttribute('class', 'uk-flex uk-flex-inline uk-width-1-1');
+        eventInformationStyling.setAttribute('style', 'background: whitesmoke;');
+
+        groupItemText.setAttribute('class', 'list-group-item-text uk-width-5-6 uk-flex-between');
         groupItemText.textContent = eventDescriptionAPI;
+
+        eventPrice.textContent = currencyAPI + eventCostAPI;
 
         venue.setAttribute('class', 'venue');
         venue.textContent = '';
@@ -138,10 +148,13 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI) {
         panelBody.appendChild(events);
         events.appendChild(groupItem);
         groupItem.appendChild(groupItemHeading);
-        groupItem.appendChild(groupItemText);
-        groupItem.appendChild(venue)
+        groupItem.appendChild(eventInformationStyling);
+        eventInformationStyling.appendChild(eventImage);
+        eventInformationStyling.appendChild(groupItemText);
+        eventInformationStyling.appendChild(eventPrice);
+        eventInformationStyling.appendChild(venue)
         Parent.prepend(panelBody);
     }
 }
 
-appendAPIresponse("Fall Out Boy", "This is a concert", "./Link will go here");
+//appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
