@@ -38,6 +38,13 @@ function showEvents(json) {
     for (var i = 0; i < events.length; i++) {
         item.children('.list-group-item-heading').text(events[i].name);
         item.children('.list-group-item-text').text(events[i].dates.start.localDate);
+        item.children().text(events[i].url);
+        item.children().text(events[i].images[i].url);
+        item.children().text(events[i].images[i].width);
+        item.children().text(events[i].images[i].height);
+        item.children().text(events[i].priceRanges[i].currency);
+        item.children().text(events[i].priceRanges[i].min);
+        item.children().text(events[i].ageRestrictions.legalAgeEnforced);
         try {
             item.children(".venue").text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
         } catch (err) {
@@ -94,3 +101,4 @@ function showAttraction(json) {
 }
 
 getEvents(page);
+
