@@ -43,28 +43,10 @@
     <main>
         <!--Search History should go here-->
         <!--Toggleable when the input is active. Toggle display:none by default-->
-        <section id="searchBar" class=" uk-flex uk-flex-center">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-                <div id="1" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 1</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="2" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 2</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="3" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 3</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="4" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 4</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
+        <section id="searchBar" class="uk-flex uk-flex-center uk-margin-top toggle-hide">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-4@m uk-padding-top" id="search-history-container">
+                <span uk-icon="icon: close" id="close-button" class="uk-position-top-right"></span>
+                <!-- Dynamically creating search history elements -->
             </div>
         </section>
         <!--Events go here and need to be dynamically generated.-->
@@ -141,8 +123,6 @@
 
 
     <!--Scripts-->
-
-
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
     <script src="assets/js/teleport.js"></script>

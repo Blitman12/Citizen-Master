@@ -1,6 +1,7 @@
 // creating gloval variables to use in function calls
 let geoId = "";
 let scoreFetchURL = "";
+let isHistoryActive = false;
 
 // Grabbed HTML elements
 let body = document.querySelector("body")
@@ -8,6 +9,10 @@ let selectedCity = document.querySelector("input")
 let searchButton = document.querySelector(".uk-button-default")
 let scoresCityName = document.getElementById("scoresCityName")
 let cityScoresDisplay = document.querySelector(".cityScores")
+let searchHistoryContainer = document.getElementById("search-history-container")
+let searchBar = document.getElementById("searchBar")
+let searchForm = document.querySelector("form")
+let historyCloseButton = document.getElementById("close-button")
 
 // Created HTML elements
 let containerEl = document.createElement("div");
@@ -162,6 +167,7 @@ let saveSearch = () => {
 let loadHistory = () => {
     // Gathering all classes with a remove-me attribute to determine if the buttons already exists (helps with duplication)
     let doesExist = document.getElementsByClassName("remove-me")
+
     // if there is nothing in localStorage then just return out of this function
     if (cityHistory.length === 0) {
         return
@@ -181,14 +187,37 @@ let loadHistory = () => {
 
     // Loops through the less than 6 localStorage array and creates buttons
     for (let i = 0; i < cityHistory.length; i++) {
-        let historyButton = document.createElement("button")
-        historyButton.setAttribute("class", "remove-me")
-        historyButton.textContent = cityHistory[i]
-        historyContainerEl.appendChild(historyButton)
-        body.appendChild(historyContainerEl)
+        // Create Elements
+        let containerEl = document.createElement("div")
+        let containerTitleEl = document.createElement("h3")
+        let containerAEl = document.createElement("a")
+
+        // Modify Elements
+        containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-between")
+        containerTitleEl.classList.add("uk-card-title")
+        containerAEl.setAttribute("uk-search-icon", "")
+        containerTitleEl.textContent = cityHistory[i]
+
+        // Append Elements
+        containerEl.appendChild(containerTitleEl)
+        containerEl.appendChild(containerAEl)
+        historyContainerEl.prepend(containerEl)
+        searchHistoryContainer.appendChild(historyContainerEl)
     }
 
 }
+
+let toggleHistoryShow = () => {
+    searchBar.classList.remove("toggle-hide")
+}
+
+let toggleHistoryHide = () => {
+    searchBar.classList.add("toggle-hide")
+}
+
+
+searchForm.addEventListener("mouseover", toggleHistoryShow)
+historyCloseButton.addEventListener("click", toggleHistoryHide)
 
 
 // This starts the fetch calls for when the search button is clicked
