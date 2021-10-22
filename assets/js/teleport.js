@@ -216,7 +216,7 @@ let toggleHistoryHide = () => {
 }
 
 
-searchForm.addEventListener("mouseover", toggleHistoryShow)
+searchForm.addEventListener("click", toggleHistoryShow)
 historyCloseButton.addEventListener("click", toggleHistoryHide)
 
 
