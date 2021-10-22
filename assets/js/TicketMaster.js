@@ -94,3 +94,54 @@ function showAttraction(json) {
 }
 
 getEvents(page);
+
+
+
+
+
+
+
+//Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
+function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI) {
+
+    if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI) {
+        console.log("You need to pass more data through!")
+    } else {
+        //Create the body elements
+        var Parent = document.querySelector('.panel-heading');
+        var panelBody = document.createElement("div");
+        var events = document.createElement("div");
+        var groupItem = document.createElement("a");
+        var groupItemHeading = document.createElement("h4")
+        var groupItemText = document.createElement("p");
+        var venue = document.createElement("p");
+
+        //modifications
+        panelBody.setAttribute('class', 'panel-body');
+
+        events.setAttribute('id', 'events');
+        events.setAttribute('class', 'list-group')
+
+        groupItem.setAttribute('href', eventURLAPI);
+        groupItem.setAttribute('class', 'list-item-group');
+
+        groupItemHeading.setAttribute('class', 'list-group-item-heading');
+        groupItemHeading.textContent = eventTitleAPI;
+
+        groupItemText.setAttribute('class', 'list-group-item-text');
+        groupItemText.textContent = eventDescriptionAPI;
+
+        venue.setAttribute('class', 'venue');
+        venue.textContent = '';
+
+        //append data
+        panelBody.appendChild(events);
+        events.appendChild(groupItem);
+        groupItem.appendChild(groupItemHeading);
+        groupItem.appendChild(groupItemText);
+        groupItem.appendChild(venue)
+        Parent.prepend(panelBody);
+    }
+}
+
+appendAPIresponse("Fall Out Boy", "This is a concert", "./Link will go here");
