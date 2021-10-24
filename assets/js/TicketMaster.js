@@ -36,15 +36,15 @@ function showEvents(json) {
     var events = json._embedded.events;
     var item = items.first();
     for (var i = 0; i < events.length; i++) {
-        item.children('.list-group-item-heading').text(events[i].name);
-        item.children('.list-group-item-text').text(events[i].dates.start.localDate);
-        item.children().text(events[i].url);
-        item.children().text(events[i].images[i].url);
-        item.children().text(events[i].images[i].width);
-        item.children().text(events[i].images[i].height);
-        item.children().text(events[i].priceRanges[i].currency);
-        item.children().text(events[i].priceRanges[i].min);
-        item.children().text(events[i].ageRestrictions.legalAgeEnforced);
+        var name = item.children('.list-group-item-heading').text(events[i].name);
+        var localDate = item.children('.list-group-item-text').text(events[i].dates.start.localDate);
+        var URL = item.children(eventURLAPI).text(events[i].url);
+        var imagesURL = item.children(eventImageURLAPI).text(events[i].images[i].url);
+        var imagesWidth = item.children(eventImageURLAPI).text(events[i].images[i].width);
+        var imagesHeight = item.children(eventImageURLAPI).text(events[i].images[i].height);
+        var currency = item.children(currencyapi).text(events[i].priceRanges[i].currency);
+        var priceMin = item.children(eventCostAPI).text(events[i].priceRanges[i].min);
+        var legalAge = item.children().text(events[i].ageRestrictions.legalAgeEnforced);
         try {
             item.children(".venue").text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
         } catch (err) {
@@ -102,3 +102,61 @@ function showAttraction(json) {
 
 getEvents(page);
 
+//Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
+function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
+
+    if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
+        console.log("You need to pass more data through!")
+    } else {
+        //Create the body elements
+        var Parent = document.querySelector('.panel-heading');
+        var panelBody = document.createElement("div");
+        var events = document.createElement("div");
+        var eventImage = document.createElement("img")
+        var groupItem = document.createElement("a");
+        var groupItemHeading = document.createElement("h4");
+        var eventInformationStyling = document.createElement("div");
+        var groupItemText = document.createElement("p");
+        var eventPrice = document.createElement("p");
+        var venue = document.createElement("p");
+
+        //modifications
+        panelBody.setAttribute('class', 'panel-body');
+
+        events.setAttribute('id', 'events');
+        events.setAttribute('class', 'list-group')
+
+        eventImage.setAttribute('src', eventImageURLAPI);
+        eventImage.setAttribute('class', 'uk-width-1-6');
+
+        groupItem.setAttribute('href', eventURLAPI);
+        groupItem.setAttribute('class', 'list-item-group');
+
+        groupItemHeading.setAttribute('class', 'list-group-item-heading');
+        groupItemHeading.textContent = eventTitleAPI;
+
+        eventInformationStyling.setAttribute('class', 'uk-flex uk-flex-inline uk-width-1-1');
+        eventInformationStyling.setAttribute('style', 'background: whitesmoke;');
+
+        groupItemText.setAttribute('class', 'list-group-item-text uk-width-5-6 uk-flex-between');
+        groupItemText.textContent = eventDescriptionAPI;
+
+        eventPrice.textContent = currencyAPI + eventCostAPI;
+
+        venue.setAttribute('class', 'venue');
+        venue.textContent = '';
+
+        //append data
+        panelBody.appendChild(events);
+        events.appendChild(groupItem);
+        groupItem.appendChild(groupItemHeading);
+        groupItem.appendChild(eventInformationStyling);
+        eventInformationStyling.appendChild(eventImage);
+        eventInformationStyling.appendChild(groupItemText);
+        eventInformationStyling.appendChild(eventPrice);
+        eventInformationStyling.appendChild(venue)
+        Parent.prepend(panelBody);
+    }
+}
+
+//appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);

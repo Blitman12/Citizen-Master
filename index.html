@@ -43,28 +43,10 @@
     <main>
         <!--Search History should go here-->
         <!--Toggleable when the input is active. Toggle display:none by default-->
-        <section id="searchBar" class=" uk-flex uk-flex-center">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-                <div id="1" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 1</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="2" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 2</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="3" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 3</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
-                <div id="4" class="uk-flex uk-flex-row uk-flex-between">
-                    <h3 class="uk-card-title">Search 4</h3>
-                    <!--on click do the search again-->
-                    <a href="" uk-search-icon></a>
-                </div>
+        <section id="searchBar" class="uk-flex uk-flex-center uk-margin-top toggle-hide">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-4@m uk-padding-top" id="search-history-container">
+                <span uk-icon="icon: close" id="close-button" class="uk-position-top-right"></span>
+                <!-- Dynamically creating search history elements -->
             </div>
         </section>
         <!--Events go here and need to be dynamically generated.-->
@@ -77,58 +59,25 @@
                         <div class="col-xs-6">
                             <div id='events-panel' class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Events</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="events" class="list-group">
-                                        <a href="#" class="list-group-item">
-                                            <h4 class="list-group-item-heading">Event title</h4>
-                                            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua.</p>
-                                            <p class="venue"></p>
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <h4 class="list-group-item-heading">Event title</h4>
-                                            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua.</p>
-                                            <p class="venue"></p>
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <h4 class="list-group-item-heading">Event title</h4>
-                                            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua.</p>
-                                            <p class="venue"></p>
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <h4 class="list-group-item-heading">Event title</h4>
-                                            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua.</p>
-                                            <p class="venue"></p>
-                                        </a>
+
+                                    <div class="panel-footer">
+                                        <nav>
+                                            <ul class="pager">
+                                                <li id="prev" class="previous"><a href="#"><span
+                                                            aria-hidden="true">&larr;</span></a></li>
+                                                <li id="next" class="next"><a href="#"><span
+                                                            aria-hidden="true">&rarr;</span></a></li>
+                                            </ul>
+                                        </nav>
                                     </div>
-                                </div>
-                                <div class="panel-footer">
-                                    <nav>
-                                        <ul class="pager">
-                                            <li id="prev" class="previous"><a href="#"><span
-                                                        aria-hidden="true">&larr;</span></a></li>
-                                            <li id="next" class="next"><a href="#"><span
-                                                        aria-hidden="true">&rarr;</span></a></li>
-                                        </ul>
-                                    </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
-
-
-
-            </div>
         </section>
     </main>
     <!--Footer slam this down to the bottom(i would use column mode in flex on the body and then space between? that might do it)-->
@@ -141,12 +90,12 @@
 
 
     <!--Scripts-->
-
-
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/teleport.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/TicketMaster.js"></script>
 </body>
 
 </html>
