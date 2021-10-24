@@ -1,3 +1,8 @@
+var eventURLAPI;
+var eventImageURLAPI;
+var eventImageURLAPI;
+var currencyapi;
+
 var page = 0;
 
 function getEvents(page) {
@@ -31,37 +36,23 @@ function getEvents(page) {
 }
 
 function showEvents(json) {
-    var items = $("#events .list-group-item");
-    items.hide();
-    var events = json._embedded.events;
-    var item = items.first();
-    for (var i = 0; i < events.length; i++) {
-        var name = item.children('.list-group-item-heading').text(events[i].name);
-        var localDate = item.children('.list-group-item-text').text(events[i].dates.start.localDate);
-        var URL = item.children(eventURLAPI).text(events[i].url);
-        var imagesURL = item.children(eventImageURLAPI).text(events[i].images[i].url);
-        var imagesWidth = item.children(eventImageURLAPI).text(events[i].images[i].width);
-        var imagesHeight = item.children(eventImageURLAPI).text(events[i].images[i].height);
-        var currency = item.children(currencyapi).text(events[i].priceRanges[i].currency);
-        var priceMin = item.children(eventCostAPI).text(events[i].priceRanges[i].min);
-        var legalAge = item.children().text(events[i].ageRestrictions.legalAgeEnforced);
-        try {
-            item.children(".venue").text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
-        } catch (err) {
-            console.log(err);
+    //console.log(json)
+    for (var i = 0; i < json._embedded.events.length; i++) {
+        var eventName = json._embedded.events[i].name;
+        var eventDescription = json._embedded.events[i].id;
+        var eventURL = json._embedded.events[i].url;
+        var eventImageURL = json._embedded.events[i].images[i].url;
+        if (json._embedded.events[i].priceRanges == undefined) {
+            var currency = "";
+            var eventCost = "Data not available";
+        } else {
+            var currency = json._embedded.events[i].priceRanges[0].currency;
+            var eventCost = ' ' + json._embedded.events[i].priceRanges[0].min;
         }
-        item.show();
-        item.off("click");
-        item.click(events[i], function (eventObject) {
-            console.log(eventObject.data);
-            try {
-                getAttraction(eventObject.data._embedded.attractions[0].id);
-            } catch (err) {
-                console.log(err);
-            }
-        });
-        item = item.next();
+        //console.log(json._embedded.events[1].priceRanges[0].currency)
+        appendAPIresponse(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
     }
+
 }
 
 $("#prev").click(function () {
@@ -141,6 +132,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         groupItemText.setAttribute('class', 'list-group-item-text uk-width-5-6 uk-flex-between');
         groupItemText.textContent = eventDescriptionAPI;
 
+        eventPrice.setAttribute('class', 'list-group-item-text uk-width-1-6 uk-flex-between');
         eventPrice.textContent = currencyAPI + eventCostAPI;
 
         venue.setAttribute('class', 'venue');
