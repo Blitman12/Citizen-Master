@@ -3,11 +3,16 @@ var searchButtonEl = document.getElementById('searchButton')
 var city = "";
 var Parent = document.querySelector('.panel-heading');
 
+var searchHistoryButton = document.getElementById("ticket-target")
+
 var page = 0;
 
-function getEvents() {
-    city = searchInput.value;
-    console.log(city)
+function getEvents(cityName) {
+    city = cityName
+    if (searchInput.value){
+        city = searchInput.value
+    } 
+ 
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
@@ -23,11 +28,12 @@ function getEvents() {
 
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0" + "&city=" + city,
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0&city=${city}`,
         async: true,
         dataType: "json",
         success: function (json) {
             getEvents.json = json;
+            console.log(this.url)
             showEvents(json);
         },
         error: function (xhr, status, err) {
@@ -37,7 +43,6 @@ function getEvents() {
 }
 
 function showEvents(json) {
-    console.log("success")
     Parent.innerHTML = ""
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
@@ -52,7 +57,6 @@ function showEvents(json) {
             var eventCost = ' ' + json._embedded.events[i].priceRanges[0].min;
         }
         //console.log(json._embedded.events[1].priceRanges[0].currency)
-        console.log(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
         appendAPIresponse(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
     }
 
@@ -158,7 +162,16 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
     }
 }
 
-searchButtonEl.addEventListener("click", getEvents);
+searchButtonEl.addEventListener("click", event => {
+    event.preventDefault()
+    getEvents()
+});
 
+searchHistoryButton.addEventListener("click", event => {
+    event.preventDefault()
+    let cityName = event.target.innerText
+   
+    getEvents(cityName)
+})
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);

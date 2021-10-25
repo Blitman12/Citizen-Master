@@ -18,6 +18,7 @@ let searchHistoryValues = document.getElementsByClassName("uk-card-title")
 // Created HTML elements
 let containerEl = document.createElement("div");
 let historyContainerEl = document.createElement("div")
+historyContainerEl.setAttribute("id", "ticket-target")
 
 // get items from localStorage, if there are none then create an empy array for future use
 let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -25,13 +26,11 @@ let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
 // the first Fetch call to grab the Most Popular city related to the search
-let intialCall = (event, eventValue) => {
-    console.log(eventValue)
-    event.preventDefault()
+let intialCall = (eventValue) => {
     containerEl.innerHTML = ""
     let searchedCity = selectedCity.value;
 
-    // checks if this came from the history buttons or not
+    // checks if this came from the history buttons or not, and if so: update value and load offCanvas
     if (eventValue) {
         searchedCity = eventValue
         UIkit.offcanvas("#offcanvas-usage").show();
@@ -229,14 +228,17 @@ searchForm.addEventListener("click", toggleHistoryShow)
 historyCloseButton.addEventListener("click", toggleHistoryHide)
 
 historyContainerEl.addEventListener("click", event => {
-    let cityName = event.target.innerText
     event.preventDefault()
-    intialCall(event, cityName)
+    let cityName = event.target.innerText
+    intialCall(cityName)
 })
-console.log(historyContainerEl)
+
 
 // This starts the fetch calls for when the search button is clicked
-searchButton.addEventListener("click", intialCall)
+searchButton.addEventListener("click", event => {
+    event.preventDefault()
+    intialCall()
+})
 
 // Display buttons on page upon load if there is localStorage present
 loadHistory()
