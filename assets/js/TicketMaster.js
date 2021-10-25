@@ -1,9 +1,11 @@
-var searchInput = document.se
+var searchInput = document.querySelector('input');
+var searchButtonEl = document.getElementById('searchButton')
+var city = 0;
 
 var page = 0;
 
 function getEvents(page) {
-
+    city = searchInput.value;
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
@@ -19,7 +21,7 @@ function getEvents(page) {
 
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=" + page,
+        url: "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0" + "&city=" + city,
         async: true,
         dataType: "json",
         success: function (json) {
@@ -33,7 +35,7 @@ function getEvents(page) {
 }
 
 function showEvents(json) {
-    //console.log(json)
+    console.log("success")
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
         var eventDescription = json._embedded.events[i].id;
@@ -60,20 +62,20 @@ $("#next").click(function () {
     getEvents(++page);
 });
 
-function getAttraction(id) {
-    $.ajax({
-        type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz",
-        async: true,
-        dataType: "json",
-        success: function (json) {
-            showAttraction(json);
-        },
-        error: function (xhr, status, err) {
-            console.log(err);
-        }
-    });
-}
+// function getAttraction(id) {
+//     $.ajax({
+//         type: "GET",
+//         url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz",
+//         async: true,
+//         dataType: "json",
+//         success: function (json) {
+//             showAttraction(json);
+//         },
+//         error: function (xhr, status, err) {
+//             console.log(err);
+//         }
+//     });
+// }
 
 function showAttraction(json) {
     $("#events-panel").hide();
@@ -147,5 +149,8 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         Parent.prepend(panelBody);
     }
 }
+
+searchButtonEl.addEventListener("click", getEvents(0));
+
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
