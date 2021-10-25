@@ -46,6 +46,7 @@ let intialCall = (eventValue) => {
             response.json().then(function (data) {
                 cityHistory.push(searchedCity)
                 saveSearch()
+                searchForm.reset()
                 // Should this continue?
                 let shouldContinue = data._embedded["city:search-results"].length
                 if (shouldContinue > 0) {
