@@ -1,7 +1,4 @@
-var eventURLAPI;
-var eventImageURLAPI;
-var eventImageURLAPI;
-var currencyapi;
+var searchInput = document.se
 
 var page = 0;
 
@@ -91,7 +88,7 @@ function showAttraction(json) {
     $("#classification").text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
 }
 
-getEvents(page);
+//getEvents(page);
 
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
 function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
