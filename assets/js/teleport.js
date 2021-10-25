@@ -37,6 +37,8 @@ let intialCall = (event) => {
     fetch(`https://api.teleport.org/api/cities/?search=${searchedCity}`).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                cityHistory.push(selectedCity.value)
+                saveSearch()
                 // Should this continue?
                 let shouldContinue = data._embedded["city:search-results"].length
                 if (shouldContinue > 0) {
@@ -97,8 +99,6 @@ let finalCall = () => {
                 })
 
                 // adding the selected city to the history if it made it through all the errors
-                cityHistory.push(selectedCity.value)
-                saveSearch()
                 displayData(wantedInformation)
             })
         } else {
@@ -204,7 +204,6 @@ let loadHistory = () => {
         historyContainerEl.prepend(containerEl)
         searchHistoryContainer.appendChild(historyContainerEl)
     }
-
 }
 
 let toggleHistoryShow = () => {

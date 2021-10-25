@@ -1,11 +1,13 @@
 var searchInput = document.querySelector('input');
 var searchButtonEl = document.getElementById('searchButton')
-var city = 0;
+var city = "";
+var Parent = document.querySelector('.panel-heading');
 
 var page = 0;
 
-function getEvents(page) {
+function getEvents() {
     city = searchInput.value;
+    console.log(city)
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
@@ -36,19 +38,21 @@ function getEvents(page) {
 
 function showEvents(json) {
     console.log("success")
+    Parent.innerHTML = ""
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
         var eventDescription = json._embedded.events[i].id;
         var eventURL = json._embedded.events[i].url;
         var eventImageURL = json._embedded.events[i].images[i].url;
         if (json._embedded.events[i].priceRanges == undefined) {
-            var currency = "";
+            var currency = "---";
             var eventCost = "Data not available";
         } else {
             var currency = json._embedded.events[i].priceRanges[0].currency;
             var eventCost = ' ' + json._embedded.events[i].priceRanges[0].min;
         }
         //console.log(json._embedded.events[1].priceRanges[0].currency)
+        console.log(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
         appendAPIresponse(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
     }
 
@@ -94,12 +98,14 @@ function showAttraction(json) {
 
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
 function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
+   
 
     if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
+        
         //Create the body elements
-        var Parent = document.querySelector('.panel-heading');
+       
         var panelBody = document.createElement("div");
         var events = document.createElement("div");
         var eventImage = document.createElement("img")
@@ -109,6 +115,8 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         var groupItemText = document.createElement("p");
         var eventPrice = document.createElement("p");
         var venue = document.createElement("p");
+
+    
 
         //modifications
         panelBody.setAttribute('class', 'panel-body');
@@ -150,7 +158,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
     }
 }
 
-searchButtonEl.addEventListener("click", getEvents(0));
+searchButtonEl.addEventListener("click", getEvents);
 
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
