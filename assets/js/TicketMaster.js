@@ -171,7 +171,7 @@ searchHistoryButton.addEventListener("click", event => {
     event.preventDefault()
     let cityName = event.target.innerText
 
-    getEvents(cityName)
+    getEvents(cityName, page)
 })
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
