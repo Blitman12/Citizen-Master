@@ -20,10 +20,11 @@ SO THAT I know where to travel to safely to see certain events
 
 ## contributors
 * Bradley Litman
-* David Schwerd 
 * Jason Offenbaker
+* David Schwerd 
+
 
 
 ## License
  JavaScript, Code Logic and Styling
-* © 2021 Bradley Litman, David Schwerd and Jason Offenbaker
+* © 2021 Bradley Litman, Jason Offenbaker and David Schwerd
