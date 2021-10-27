@@ -150,7 +150,10 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
     }
 }
 
-searchButtonEl.addEventListener("click", getEvents(0));
+function searchButtonTest() {
+    console.log("Im here")
+}
 
+searchButtonEl.addEventListener("click", getEvents);
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
