@@ -199,17 +199,14 @@ let loadHistory = () => {
         // Create Elements
         let containerEl = document.createElement("div")
         let containerTitleEl = document.createElement("h3")
-        let containerAEl = document.createElement("a")
 
         // Modify Elements
         containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-between")
         containerTitleEl.classList.add("uk-card-title")
-        containerAEl.setAttribute("uk-search-icon", "")
         containerTitleEl.textContent = cityHistory[i]
 
         // Append Elements
         containerEl.appendChild(containerTitleEl)
-        containerEl.appendChild(containerAEl)
         historyContainerEl.prepend(containerEl)
         searchHistoryContainer.appendChild(historyContainerEl)
     }
