@@ -28,7 +28,7 @@ function getEvents(cityName) {
 
     $.ajax({
         type: "GET",
-        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0&city=${city}`,
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=` + page + `&city=${city}`,
         async: true,
         dataType: "json",
         success: function (json) {

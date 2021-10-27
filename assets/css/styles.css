@@ -18,9 +18,9 @@ footer{
     color: white;
     text-align: center; 
 }
-.pager{
-    background-color:  #AAB8C2;
+#pager{
     position: fixed;
-    bottom: 300px;
+    bottom: 60px;
     width: 100%;
+    z-index: 2;
 }
