@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon-32x32.png">
     <title>Citizen Master</title>
 </head>
 
@@ -19,13 +20,14 @@
                 <nav class="uk-navbar-container" uk-navbar>
                     <div class="uk-navbar-left">
                         <a href="" uk-search-icon></a>
-                        <input class="uk-search-input" type="search" placeholder="">
+                        <input class="uk-search-input" type="search" placeholder="Enter a city">
                     </div>
                 </nav>
             </form>
             <button class="uk-button uk-button-default uk-margin-small-right" id="searchButton" type="button"
                 uk-toggle="target: #offcanvas-usage">Search</button>
 
+            <a href="#offcanvas-usage" uk-toggle></a>
             <div id="offcanvas-usage" uk-offcanvas=>
                 <div class="uk-offcanvas-bar">
 
@@ -43,8 +45,8 @@
     <main>
         <!--Search History should go here-->
         <!--Toggleable when the input is active. Toggle display:none by default-->
-        <section id="searchBar" class="uk-flex uk-flex-center uk-margin-top toggle-hide">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-4@m uk-padding-top"
+        <section id="searchBar" class="uk-flex uk-flex-center uk-margin-top toggle-hide ">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-4@m uk-padding-top uk-position-absolute"
                 id="search-history-container">
                 <span uk-icon="icon: close" id="close-button" class="uk-position-top-right"></span>
                 <!-- Dynamically creating search history elements -->
@@ -63,11 +65,15 @@
 
                                     <div class="panel-footer">
                                         <nav>
-                                            <ul class="pager">
-                                                <li id="prev" class="previous"><a href="#"><span
-                                                            aria-hidden="true">&larr;</span></a></li>
-                                                <li id="next" class="next"><a href="#"><span
-                                                            aria-hidden="true">&rarr;</span></a></li>
+                                            <ul class="pager uk-flex uk-flex-between">
+                                                <div>
+                                                    <li id="prev" class="previous"><a href="#"><span
+                                                                aria-hidden="true">&larr;</span></a></li>
+                                                </div>
+                                                <div>
+                                                    <li id="next" class="next"><a href="#"><span
+                                                                aria-hidden="true">&rarr;</span></a></li>
+                                                </div>
                                             </ul>
                                         </nav>
                                     </div>
@@ -83,10 +89,13 @@
     </main>
     <!--Footer slam this down to the bottom(i would use column mode in flex on the body and then space between? that might do it)-->
     <footer class="uk-card-footer" id="footer">
-        <div class="uk-flex uk-flex-between">
-            <!--<img alt="Citizen Master Logo/BigText" src="" />-->
-            <p>&copyCitizen Master</p>
-            <p>&copyCitizen Master</p>
+        <div class="uk-flex uk-flex-around">
+            <div>
+                <img alt="Citizen Master Logo/BigText" src="" />
+            </div>
+            <div>
+                <p>&copyCitizen Master</p>
+            </div>
         </div>
     </footer>
 
@@ -96,7 +105,6 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/teleport.js"></script>
-    <script src="assets/js/script.js"></script>
     <script src="assets/js/TicketMaster.js"></script>
 </body>
 

@@ -13,10 +13,12 @@ let searchHistoryContainer = document.getElementById("search-history-container")
 let searchBar = document.getElementById("searchBar")
 let searchForm = document.querySelector("form")
 let historyCloseButton = document.getElementById("close-button")
+let searchHistoryValues = document.getElementsByClassName("uk-card-title")
 
 // Created HTML elements
 let containerEl = document.createElement("div");
 let historyContainerEl = document.createElement("div")
+historyContainerEl.setAttribute("id", "ticket-target")
 
 // get items from localStorage, if there are none then create an empy array for future use
 let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -24,10 +26,15 @@ let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
 // the first Fetch call to grab the Most Popular city related to the search
-let intialCall = (event) => {
-    event.preventDefault()
+let intialCall = (eventValue) => {
     containerEl.innerHTML = ""
     let searchedCity = selectedCity.value;
+
+    // checks if this came from the history buttons or not, and if so: update value and load offCanvas
+    if (eventValue) {
+        searchedCity = eventValue
+        UIkit.offcanvas("#offcanvas-usage").show();
+    }
 
     // quick error handling for if they have nothing entered
     if (searchedCity === "") {
@@ -37,6 +44,9 @@ let intialCall = (event) => {
     fetch(`https://api.teleport.org/api/cities/?search=${searchedCity}`).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                cityHistory.push(searchedCity)
+                saveSearch()
+                searchForm.reset()
                 // Should this continue?
                 let shouldContinue = data._embedded["city:search-results"].length
                 if (shouldContinue > 0) {
@@ -97,8 +107,6 @@ let finalCall = () => {
                 })
 
                 // adding the selected city to the history if it made it through all the errors
-                cityHistory.push(selectedCity.value)
-                saveSearch()
                 displayData(wantedInformation)
             })
         } else {
@@ -167,6 +175,7 @@ let saveSearch = () => {
 let loadHistory = () => {
     // Gathering all classes with a remove-me attribute to determine if the buttons already exists (helps with duplication)
     let doesExist = document.getElementsByClassName("remove-me")
+    
 
     // if there is nothing in localStorage then just return out of this function
     if (cityHistory.length === 0) {
@@ -190,21 +199,18 @@ let loadHistory = () => {
         // Create Elements
         let containerEl = document.createElement("div")
         let containerTitleEl = document.createElement("h3")
-        let containerAEl = document.createElement("a")
 
         // Modify Elements
         containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-between")
         containerTitleEl.classList.add("uk-card-title")
-        containerAEl.setAttribute("uk-search-icon", "")
         containerTitleEl.textContent = cityHistory[i]
 
         // Append Elements
         containerEl.appendChild(containerTitleEl)
-        containerEl.appendChild(containerAEl)
         historyContainerEl.prepend(containerEl)
         searchHistoryContainer.appendChild(historyContainerEl)
     }
-
+    
 }
 
 let toggleHistoryShow = () => {
@@ -219,9 +225,18 @@ let toggleHistoryHide = () => {
 searchForm.addEventListener("click", toggleHistoryShow)
 historyCloseButton.addEventListener("click", toggleHistoryHide)
 
+historyContainerEl.addEventListener("click", event => {
+    event.preventDefault()
+    let cityName = event.target.innerText
+    intialCall(cityName)
+})
+
 
 // This starts the fetch calls for when the search button is clicked
-searchButton.addEventListener("click", intialCall)
+searchButton.addEventListener("click", event => {
+    event.preventDefault()
+    intialCall()
+})
 
 // Display buttons on page upon load if there is localStorage present
 loadHistory()

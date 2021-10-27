@@ -1,11 +1,18 @@
 var searchInput = document.querySelector('input');
 var searchButtonEl = document.getElementById('searchButton')
-var city = 0;
+var city = "";
+var Parent = document.querySelector('.panel-heading');
+
+var searchHistoryButton = document.getElementById("ticket-target")
 
 var page = 0;
 
-function getEvents(page) {
-    city = searchInput.value;
+function getEvents(cityName) {
+    city = cityName
+    if (searchInput.value) {
+        city = searchInput.value
+    }
+
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
@@ -21,11 +28,12 @@ function getEvents(page) {
 
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0" + "&city=" + city,
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0&city=${city}`,
         async: true,
         dataType: "json",
         success: function (json) {
             getEvents.json = json;
+            console.log(this.url)
             showEvents(json);
         },
         error: function (xhr, status, err) {
@@ -35,14 +43,14 @@ function getEvents(page) {
 }
 
 function showEvents(json) {
-    console.log("success")
+    Parent.innerHTML = ""
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
         var eventDescription = json._embedded.events[i].id;
         var eventURL = json._embedded.events[i].url;
         var eventImageURL = json._embedded.events[i].images[i].url;
         if (json._embedded.events[i].priceRanges == undefined) {
-            var currency = "";
+            var currency = "---";
             var eventCost = "Data not available";
         } else {
             var currency = json._embedded.events[i].priceRanges[0].currency;
@@ -95,11 +103,13 @@ function showAttraction(json) {
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
 function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
 
+
     if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
+
         //Create the body elements
-        var Parent = document.querySelector('.panel-heading');
+
         var panelBody = document.createElement("div");
         var events = document.createElement("div");
         var eventImage = document.createElement("img")
@@ -109,6 +119,8 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         var groupItemText = document.createElement("p");
         var eventPrice = document.createElement("p");
         var venue = document.createElement("p");
+
+
 
         //modifications
         panelBody.setAttribute('class', 'panel-body');
@@ -150,10 +162,16 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
     }
 }
 
-function searchButtonTest() {
-    console.log("Im here")
-}
+searchButtonEl.addEventListener("click", event => {
+    event.preventDefault()
+    getEvents()
+});
 
-searchButtonEl.addEventListener("click", getEvents);
+searchHistoryButton.addEventListener("click", event => {
+    event.preventDefault()
+    let cityName = event.target.innerText
+
+    getEvents(cityName)
+})
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
