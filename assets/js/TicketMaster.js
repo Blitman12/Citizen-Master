@@ -132,6 +132,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         eventImage.setAttribute('class', 'uk-width-1-6');
 
         groupItem.setAttribute('href', eventURLAPI);
+        groupItem.setAttribute("target", "_blank")
         groupItem.setAttribute('class', 'list-item-group');
 
         groupItemHeading.setAttribute('class', 'list-group-item-heading');
@@ -141,7 +142,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         eventInformationStyling.setAttribute('style', 'background: whitesmoke;');
 
         groupItemText.setAttribute('class', 'list-group-item-text uk-width-5-6 uk-flex-between');
-        groupItemText.textContent = eventDescriptionAPI;
+        groupItemText.textContent =  " ";
 
         eventPrice.setAttribute('class', 'list-group-item-text uk-width-1-6 uk-flex-between');
         eventPrice.textContent = currencyAPI + eventCostAPI;
