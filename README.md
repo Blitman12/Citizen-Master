@@ -6,7 +6,6 @@ An application where you can search for local events in a town using the TicketM
 ## Project Description
 This project was created to help travelers determine important city "scores" focused on: travel, healthcare, commute, cost of living, leisure etc... The user is also able to find nearby events in the selected city. 
 
-
 ## User Story
 ```
 AS A User with an interest in looking for a local event in town.
@@ -18,12 +17,14 @@ SO THAT I know where to travel to safely to see certain events
 ## Production Link
 [Citizen Master](https://blitman12.github.io/Citizen-Master/)
 
+## Screenshots
+![Screenshot1](assets/images/Screenshot1.JPG)
+![Screenshot2](assets/images/Screenshot2.JPG)
+
 ## Contributors
 * Bradley Litman
 * Jason Offenbaker
 * David Schwerd 
-
-
 
 ## License
  JavaScript, Code Logic and Styling
