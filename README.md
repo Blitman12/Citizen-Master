@@ -21,6 +21,11 @@ SO THAT I know where to travel to safely to see certain events
 ![Screenshot1](assets/images/Screenshot1.JPG)
 ![Screenshot2](assets/images/Screenshot2.JPG)
 
+## Acknowledgements
+* Teleport API
+* Ticketmaster API
+* UiKit
+
 ## Contributors
 * Bradley Litman
 * Jason Offenbaker
