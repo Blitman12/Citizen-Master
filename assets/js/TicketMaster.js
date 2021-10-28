@@ -9,10 +9,10 @@ var page = 0;
 
 function getEvents(cityName) {
     city = cityName
-    if (searchInput.value){
+    if (searchInput.value) {
         city = searchInput.value
-    } 
- 
+    }
+
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
@@ -28,7 +28,7 @@ function getEvents(cityName) {
 
     $.ajax({
         type: "GET",
-        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0&city=${city}`,
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=` + page + `&city=${city}`,
         async: true,
         dataType: "json",
         success: function (json) {
@@ -102,14 +102,14 @@ function showAttraction(json) {
 
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
 function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
-   
+
 
     if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
-        
+
         //Create the body elements
-       
+
         var panelBody = document.createElement("div");
         var events = document.createElement("div");
         var eventImage = document.createElement("img")
@@ -120,7 +120,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         var eventPrice = document.createElement("p");
         var venue = document.createElement("p");
 
-    
+
 
         //modifications
         panelBody.setAttribute('class', 'panel-body');
@@ -170,8 +170,8 @@ searchButtonEl.addEventListener("click", event => {
 searchHistoryButton.addEventListener("click", event => {
     event.preventDefault()
     let cityName = event.target.innerText
-   
-    getEvents(cityName)
+
+    getEvents(cityName, page)
 })
 
 //appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);
