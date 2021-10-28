@@ -53,7 +53,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
     if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
-
+        // Create Elements
         let containerDiv = document.createElement("div")
         let oneEventDiv = document.createElement("div")
         let imageEl = document.createElement("img")
@@ -63,7 +63,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         let pEl = document.createElement("p")
         let divLink = document.createElement("a")
 
-
+        // Modify Elements
         containerDiv.classList.add("uk-card", "uk-card-default", "uk-grid-collapse", "uk-width-1-1", "uk-margin-top")
         containerDiv.setAttribute("uk-grid", "")
         containerDiv.setAttribute("style", "z-index: -1")
@@ -73,25 +73,19 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         oneEventDiv.classList.add("uk-card-media-left", "uk-cover-container")
         imageEl.setAttribute("uk-cover", "")
         imageEl.setAttribute('src', eventImageURLAPI);
-        // canvasEl.setAttribute("width", "150")
-        // canvasEl.setAttribute("height", "150")
         titleDiv.classList.add("uk-card-body", "uk-margin-left")
         h3Div.classList.add("uk-card-title")
-
         h3Div.textContent = eventTitleAPI;
         pEl.textContent = currencyAPI + eventCostAPI;
 
+        // Append To The Page
         oneEventDiv.appendChild(imageEl)
         oneEventDiv.appendChild(canvasEl)
-
         titleDiv.appendChild(h3Div)
         titleDiv.appendChild(pEl)
-
         containerDiv.appendChild(oneEventDiv)
         containerDiv.appendChild(titleDiv)
-
         divLink.appendChild(containerDiv)
-
         Parent.prepend(divLink);
     }
 }
