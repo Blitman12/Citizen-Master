@@ -134,6 +134,7 @@ let displayData = (informationArr) => {
         let scoreSpan = document.createElement("span")
         let scoreBar = document.createElement("progress")
         let dividerIcon = document.createElement("hr")
+    
 
         // rounds the score to the nearest whole value
         let scoreRounded = Math.round(informationArr[i].score_out_of_10)
@@ -248,6 +249,7 @@ searchButton.addEventListener("click", event => {
     toggleHeroHide()
     intialCall()
 })
+
 
 // Display buttons on page upon load if there is localStorage present
 loadHistory()

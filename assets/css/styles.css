@@ -6,6 +6,10 @@
     padding: 10px;
 }
 
+#search-icon {
+    pointer-events: none;
+}
+
 header{
    background-color: #1DA1F2;
    padding-top: 1px;

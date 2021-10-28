@@ -5,6 +5,7 @@ var Parent = document.querySelector('#events');
 var searchHistoryButton = document.getElementById("ticket-target")
 
 
+
 function getEvents(cityName) {
     city = cityName
     if (searchInput.value) {
@@ -18,7 +19,6 @@ function getEvents(cityName) {
         dataType: "json",
         success: function (json) {
             getEvents.json = json;
-            console.log(this.url)
             showEvents(json);
         },
         error: function (xhr, status, err) {
@@ -28,7 +28,6 @@ function getEvents(cityName) {
 }
 
 function showEvents(json) {
-    console.log(json)
     Parent.innerHTML = ""
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
