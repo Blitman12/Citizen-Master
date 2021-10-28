@@ -75,7 +75,7 @@ function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, even
         imageEl.setAttribute('src', eventImageURLAPI);
         // canvasEl.setAttribute("width", "150")
         // canvasEl.setAttribute("height", "150")
-        titleDiv.classList.add("uk-card-body")
+        titleDiv.classList.add("uk-card-body", "uk-margin-left")
         h3Div.classList.add("uk-card-title")
 
         h3Div.textContent = eventTitleAPI;

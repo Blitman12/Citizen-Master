@@ -14,12 +14,14 @@ let searchBar = document.getElementById("searchBar")
 let searchForm = document.querySelector("form")
 let historyCloseButton = document.getElementById("close-button")
 let searchHistoryValues = document.getElementsByClassName("uk-card-title")
+let heroDiv = document.getElementById("hero")
 
 // Created HTML elements
 let containerEl = document.createElement("div");
 let historyContainerEl = document.createElement("div")
 historyContainerEl.setAttribute("id", "ticket-target")
-historyContainerEl.setAttribute("class", "uk-position-z-index")
+historyContainerEl.classList.add("uk-margin-remove", "uk-position-z-index")
+
 
 // get items from localStorage, if there are none then create an empy array for future use
 let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -202,7 +204,7 @@ let loadHistory = () => {
         let containerTitleEl = document.createElement("h3")
 
         // Modify Elements
-        containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-between")
+        containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-around")
         containerTitleEl.classList.add("uk-card-title")
         containerTitleEl.textContent = cityHistory[i]
 
@@ -222,6 +224,10 @@ let toggleHistoryHide = () => {
     searchBar.classList.add("toggle-hide")
 }
 
+let toggleHeroHide = () => {
+    heroDiv.classList.add("toggle-hide")
+}
+
 
 searchForm.addEventListener("click", toggleHistoryShow)
 historyCloseButton.addEventListener("click", toggleHistoryHide)
@@ -229,6 +235,7 @@ historyCloseButton.addEventListener("click", toggleHistoryHide)
 historyContainerEl.addEventListener("click", event => {
     event.preventDefault()
     toggleHistoryHide()
+    toggleHeroHide()
     let cityName = event.target.innerText
     intialCall(cityName)
 })
@@ -238,6 +245,7 @@ historyContainerEl.addEventListener("click", event => {
 searchButton.addEventListener("click", event => {
     event.preventDefault()
     toggleHistoryHide()
+    toggleHeroHide()
     intialCall()
 })
 

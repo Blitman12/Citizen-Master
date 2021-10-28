@@ -10,6 +10,7 @@ header{
    padding-top: 1px;
    padding-bottom:20px; 
 }
+
 footer{
     background-color:  #AAB8C2;
     position: fixed;
@@ -17,22 +18,26 @@ footer{
     width: 100%;
     color: white;
     text-align: center; 
+    height: 25px;
 }
 
 footer p {
     margin-right: 100px;
 }
 
-.alignment-div {
-    flex: 0 1 auto;
-}
 
-.search-div {
+/* .alignment-div {
+    flex: 0 1 auto;
+} */
+
+/* .search-div {
     justify-content: center;
 }
+
+
 
 @media (min-width: 600px) {
     .search-div {
         justify-content: space-between;
     }
-}
+}  */
