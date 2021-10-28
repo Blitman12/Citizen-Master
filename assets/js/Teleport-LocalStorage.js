@@ -15,6 +15,7 @@ let searchForm = document.querySelector("form")
 let historyCloseButton = document.getElementById("close-button")
 let searchHistoryValues = document.getElementsByClassName("uk-card-title")
 let heroDiv = document.getElementById("hero")
+let historyTitle = document.getElementById("history-title")
 
 // Created HTML elements
 let containerEl = document.createElement("div");
@@ -134,7 +135,7 @@ let displayData = (informationArr) => {
         let scoreSpan = document.createElement("span")
         let scoreBar = document.createElement("progress")
         let dividerIcon = document.createElement("hr")
-    
+
 
         // rounds the score to the nearest whole value
         let scoreRounded = Math.round(informationArr[i].score_out_of_10)
@@ -179,10 +180,11 @@ let saveSearch = () => {
 let loadHistory = () => {
     // Gathering all classes with a remove-me attribute to determine if the buttons already exists (helps with duplication)
     let doesExist = document.getElementsByClassName("remove-me")
-    
+
 
     // if there is nothing in localStorage then just return out of this function
     if (cityHistory.length === 0) {
+        historyTitle.textContent = "No History Yet"
         return
     }
 
@@ -200,6 +202,7 @@ let loadHistory = () => {
 
     // Loops through the less than 6 localStorage array and creates buttons
     for (let i = 0; i < cityHistory.length; i++) {
+        historyTitle.textContent = "History"
         // Create Elements
         let containerEl = document.createElement("div")
         let containerTitleEl = document.createElement("h3")
@@ -214,7 +217,7 @@ let loadHistory = () => {
         historyContainerEl.prepend(containerEl)
         searchHistoryContainer.appendChild(historyContainerEl)
     }
-    
+
 }
 
 let toggleHistoryShow = () => {
