@@ -1,11 +1,9 @@
 var searchInput = document.querySelector('input');
 var searchButtonEl = document.getElementById('searchButton')
 var city = "";
-var Parent = document.querySelector('.panel-heading');
-
+var Parent = document.querySelector('#events');
 var searchHistoryButton = document.getElementById("ticket-target")
 
-var page = 0;
 
 function getEvents(cityName) {
     city = cityName
@@ -13,22 +11,9 @@ function getEvents(cityName) {
         city = searchInput.value
     }
 
-    $('#events-panel').show();
-    $('#attraction-panel').hide();
-
-    if (page < 0) {
-        page = 0;
-        return;
-    }
-    if (page > 0) {
-        if (page > getEvents.json.page.totalPages - 1) {
-            page = 0;
-        }
-    }
-
     $.ajax({
         type: "GET",
-        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=` + page + `&city=${city}`,
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page=0&city=${city}`,
         async: true,
         dataType: "json",
         success: function (json) {
@@ -43,6 +28,7 @@ function getEvents(cityName) {
 }
 
 function showEvents(json) {
+    console.log(json)
     Parent.innerHTML = ""
     for (var i = 0; i < json._embedded.events.length; i++) {
         var eventName = json._embedded.events[i].name;
@@ -56,110 +42,57 @@ function showEvents(json) {
             var currency = json._embedded.events[i].priceRanges[0].currency;
             var eventCost = ' ' + json._embedded.events[i].priceRanges[0].min;
         }
-        //console.log(json._embedded.events[1].priceRanges[0].currency)
+        console.log(json)
         appendAPIresponse(eventName, eventDescription, eventURL, eventImageURL, currency, eventCost)
     }
 
 }
 
-$("#prev").click(function () {
-    getEvents(--page);
-});
-
-$("#next").click(function () {
-    getEvents(++page);
-});
-
-// function getAttraction(id) {
-//     $.ajax({
-//         type: "GET",
-//         url: "https://app.ticketmaster.com/discovery/v2/attractions/" + id + ".json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz",
-//         async: true,
-//         dataType: "json",
-//         success: function (json) {
-//             showAttraction(json);
-//         },
-//         error: function (xhr, status, err) {
-//             console.log(err);
-//         }
-//     });
-// }
-
-function showAttraction(json) {
-    $("#events-panel").hide();
-    $("#attraction-panel").show();
-
-    $("#attraction-panel").click(function () {
-        getEvents(page);
-    });
-
-    $("#attraction .list-group-item-heading").first().text(json.name);
-    $("#attraction img").first().attr('src', json.images[0].url);
-    $("#classification").text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
-}
-
-//getEvents(page);
-
 //Takes the API data from TicketMaster and displays it to the page if the right data is passed through.
 function appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI) {
-
-
     if (!eventTitleAPI || !eventDescriptionAPI || !eventURLAPI || !eventImageURLAPI || !currencyAPI || !eventCostAPI) {
         console.log("You need to pass more data through!")
     } else {
 
-        //Create the body elements
-
-        var panelBody = document.createElement("div");
-        var events = document.createElement("div");
-        var eventImage = document.createElement("img")
-        var groupItem = document.createElement("a");
-        var groupItemHeading = document.createElement("h4");
-        var eventInformationStyling = document.createElement("div");
-        var groupItemText = document.createElement("p");
-        var eventPrice = document.createElement("p");
-        var venue = document.createElement("p");
+        let containerDiv = document.createElement("div")
+        let oneEventDiv = document.createElement("div")
+        let imageEl = document.createElement("img")
+        let canvasEl = document.createElement("canvas")
+        let titleDiv = document.createElement("div")
+        let h3Div = document.createElement("h3")
+        let pEl = document.createElement("p")
+        let divLink = document.createElement("a")
 
 
+        containerDiv.classList.add("uk-card", "uk-card-default", "uk-grid-collapse", "uk-width-1-1", "uk-margin-top")
+        containerDiv.setAttribute("uk-grid", "")
+        containerDiv.setAttribute("style", "z-index: -1")
+        divLink.setAttribute("href", eventURLAPI)
+        divLink.classList.add("uk-margin-remove", "uk-padding-remove")
+        divLink.setAttribute("target", "_blank")
+        oneEventDiv.classList.add("uk-card-media-left", "uk-cover-container")
+        imageEl.setAttribute("uk-cover", "")
+        imageEl.setAttribute('src', eventImageURLAPI);
+        // canvasEl.setAttribute("width", "150")
+        // canvasEl.setAttribute("height", "150")
+        titleDiv.classList.add("uk-card-body")
+        h3Div.classList.add("uk-card-title")
 
-        //modifications
-        panelBody.setAttribute('class', 'panel-body');
+        h3Div.textContent = eventTitleAPI;
+        pEl.textContent = currencyAPI + eventCostAPI;
 
-        events.setAttribute('id', 'events');
-        events.setAttribute('class', 'list-group')
+        oneEventDiv.appendChild(imageEl)
+        oneEventDiv.appendChild(canvasEl)
 
-        eventImage.setAttribute('src', eventImageURLAPI);
-        eventImage.setAttribute('class', 'uk-width-1-6');
+        titleDiv.appendChild(h3Div)
+        titleDiv.appendChild(pEl)
 
-        groupItem.setAttribute('href', eventURLAPI);
-        groupItem.setAttribute("target", "_blank")
-        groupItem.setAttribute('class', 'list-item-group');
+        containerDiv.appendChild(oneEventDiv)
+        containerDiv.appendChild(titleDiv)
 
-        groupItemHeading.setAttribute('class', 'list-group-item-heading');
-        groupItemHeading.textContent = eventTitleAPI;
+        divLink.appendChild(containerDiv)
 
-        eventInformationStyling.setAttribute('class', 'uk-flex uk-flex-inline uk-width-1-1');
-        eventInformationStyling.setAttribute('style', 'background: whitesmoke;');
-
-        groupItemText.setAttribute('class', 'list-group-item-text uk-width-5-6 uk-flex-between');
-        groupItemText.textContent =  " ";
-
-        eventPrice.setAttribute('class', 'list-group-item-text uk-width-1-6 uk-flex-between');
-        eventPrice.textContent = currencyAPI + eventCostAPI;
-
-        venue.setAttribute('class', 'venue');
-        venue.textContent = '';
-
-        //append data
-        panelBody.appendChild(events);
-        events.appendChild(groupItem);
-        groupItem.appendChild(groupItemHeading);
-        groupItem.appendChild(eventInformationStyling);
-        eventInformationStyling.appendChild(eventImage);
-        eventInformationStyling.appendChild(groupItemText);
-        eventInformationStyling.appendChild(eventPrice);
-        eventInformationStyling.appendChild(venue)
-        Parent.prepend(panelBody);
+        Parent.prepend(divLink);
     }
 }
 
@@ -171,8 +104,5 @@ searchButtonEl.addEventListener("click", event => {
 searchHistoryButton.addEventListener("click", event => {
     event.preventDefault()
     let cityName = event.target.innerText
-
-    getEvents(cityName, page)
+    getEvents(cityName)
 })
-
-//appendAPIresponse(eventTitleAPI, eventDescriptionAPI, eventURLAPI, eventImageURLAPI, currencyAPI, eventCostAPI);

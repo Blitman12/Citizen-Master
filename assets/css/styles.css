@@ -18,9 +18,21 @@ footer{
     color: white;
     text-align: center; 
 }
-#pager{
-    position: fixed;
-    bottom: 60px;
-    width: 100%;
-    z-index: 2;
+
+footer p {
+    margin-right: 100px;
+}
+
+.alignment-div {
+    flex: 0 1 auto;
+}
+
+.search-div {
+    justify-content: center;
+}
+
+@media (min-width: 600px) {
+    .search-div {
+        justify-content: space-between;
+    }
 }

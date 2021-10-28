@@ -19,6 +19,7 @@ let searchHistoryValues = document.getElementsByClassName("uk-card-title")
 let containerEl = document.createElement("div");
 let historyContainerEl = document.createElement("div")
 historyContainerEl.setAttribute("id", "ticket-target")
+historyContainerEl.setAttribute("class", "uk-position-z-index")
 
 // get items from localStorage, if there are none then create an empy array for future use
 let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -227,6 +228,7 @@ historyCloseButton.addEventListener("click", toggleHistoryHide)
 
 historyContainerEl.addEventListener("click", event => {
     event.preventDefault()
+    toggleHistoryHide()
     let cityName = event.target.innerText
     intialCall(cityName)
 })
@@ -235,6 +237,7 @@ historyContainerEl.addEventListener("click", event => {
 // This starts the fetch calls for when the search button is clicked
 searchButton.addEventListener("click", event => {
     event.preventDefault()
+    toggleHistoryHide()
     intialCall()
 })
 

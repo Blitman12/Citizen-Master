@@ -14,21 +14,24 @@
 <body>
     <!--Primary color here-->
     <header uk-sticky>
+      
         <!--Search bar and side popout goes here-->
-        <div class="uk-flex uk-flex-center uk-margin-top">
-            <form class="uk-search uk-search-default" type="search">
-                <nav class="uk-navbar-container" uk-navbar>
-                    <div class="uk-navbar-left">
+        <div class="uk-flex uk-margin-top search-div uk-flex-wrap">
+            <img src="assets/images/Citizen Master.svg" alt="Citizen Master Logo" class="">
+            <div class="uk-flex uk-flex-middle">
+            <form class="uk-search uk-search-default uk-background-primary" type="search">
+                <nav class="uk-navbar-container">
+                    <div class="">
                         <a href="" uk-search-icon></a>
-                        <input class="uk-search-input" type="search" placeholder="Enter a city">
+                        <input class="uk-search-input " type="search" placeholder="Enter a city">
                     </div>
                 </nav>
             </form>
-            <button class="uk-button uk-button-default uk-margin-small-right" id="searchButton" type="button"
+            <button class="uk-button uk-button-default uk-margin-small-right uk-button-primary" id="searchButton" type="button"
                 uk-toggle="target: #offcanvas-usage">Search</button>
-
+            </div>
             <a href="#offcanvas-usage" uk-toggle></a>
-            <div id="offcanvas-usage" uk-offcanvas=>
+            <div id="offcanvas-usage" uk-offcanvas>
                 <div class="uk-offcanvas-bar">
 
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
@@ -39,6 +42,9 @@
                     </p>
 
                 </div>
+            </div>
+            <div class="alignment-div">
+
             </div>
         </div>
     </header>
@@ -53,51 +59,15 @@
             </div>
         </section>
         <!--Events go here and need to be dynamically generated.-->
-        <section>
+        <section class="uk-flex uk-flex-column uk-flex-middle">
             <div id="events">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div id='events-panel' class="panel panel-primary">
-                                <div class="panel-heading">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="pager">
-                <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100"
-                    class="uk-flex ul-flex-between uk-flex-column">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div id='events-panel' class="panel panel-primary">
 
-                                    <div class="panel-footer">
-                                        <nav>
-                                            <ul class="pager uk-flex uk-flex-between">
-                                                <div>
-                                                    <li id="prev" class="previous"><a href="#"><span
-                                                                aria-hidden="true">&larr;</span></a></li>
-                                                </div>
-                                                <div>
-                                                    <li id="next" class="next"><a href="#"><span
-                                                                aria-hidden="true">&rarr;</span></a></li>
-                                                </div>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </section>
     </main>
     <!--Footer slam this down to the bottom(i would use column mode in flex on the body and then space between? that might do it)-->
     <footer class="uk-card-footer" id="footer">
-        <div class="uk-flex uk-flex-around">
+        <div class="uk-flex uk-flex-between">
             <div>
                 <img alt="Citizen Master Logo/BigText" src="assets/images/favicon-32x32.png" />
             </div>
