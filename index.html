@@ -14,24 +14,24 @@
 <body>
     <!--Primary color here-->
     <header uk-sticky>
-      
+
         <!--Search bar and side popout goes here-->
         <div class="uk-flex uk-margin-top search-div uk-flex-center uk-flex-wrap">
             <a href="index.html">
-            <img src="assets/images/Citizen Master.svg" alt="Citizen Master Logo">
+                <img src="assets/images/Citizen Master.svg" alt="Citizen Master Logo">
             </a>
 
             <div class="uk-flex uk-flex-middle">
-            <form class="uk-search uk-search-default uk-background-primary" type="search">
-                <nav class="uk-navbar-container">
-                    <div class="">
-                        <a href="" uk-search-icon></a>
-                        <input class="uk-search-input " type="search" placeholder="Enter a city">
-                    </div>
-                </nav>
-            </form>
-            <button class="uk-button uk-button-default uk-margin-small-right uk-button-primary" id="searchButton" type="button"
-                uk-toggle="target: #offcanvas-usage">Search</button>
+                <form class="uk-search uk-search-default uk-background-primary" type="search">
+                    <nav class="uk-navbar-container">
+                        <div class="">
+                            <a href="" uk-search-icon></a>
+                            <input class="uk-search-input " type="search" placeholder="Enter a city">
+                        </div>
+                    </nav>
+                </form>
+                <button class="uk-button uk-button-default uk-margin-small-right uk-button-primary" id="searchButton"
+                    type="button" uk-toggle="target: #offcanvas-usage">Search</button>
             </div>
             <a href="#offcanvas-usage" uk-toggle></a>
             <div id="offcanvas-usage" uk-offcanvas>
@@ -46,26 +46,31 @@
 
                 </div>
             </div>
-            <!-- <div class="alignment-div">
-
-            </div> -->
         </div>
     </header>
     <main>
+
         <!--Search History should go here-->
         <!--Toggleable when the input is active. Toggle display:none by default-->
         <section id="searchBar" class="uk-flex uk-flex-center toggle-hide uk-margin-remove">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-6@m uk-width-1-2 uk-position-absolute uk-margin-remove"
+            <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-width-1-6@m uk-width-1-2 uk-position-absolute uk-margin-remove "
                 id="search-history-container">
                 <span uk-icon="icon: close" id="close-button" class="uk-position-top-right"></span>
                 <!-- Dynamically creating search history elements -->
             </div>
         </section>
+
         <!-- Hero image -->
-        <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column uk-background-cover" id="hero" uk-height-viewport="offset-top: true" data-src="assets/images/hero.jpg" uk-img>
-            <h1 class="uk-text-uppercase uk-text-emphasis uk-text-bolder"><span class="uk-text-background uk-background-secondary">Citizen Master</span></h1>
-            <p class="uk-text-emphasis uk-text-bold"><span class="uk-text-background uk-background-secondary">Find your next travel destinations city scores and nearby events</span></p>
-          </div>
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column uk-background-cover" id="hero"
+            uk-height-viewport="offset-top: true" data-src="assets/images/hero.jpg" uk-img>
+            <h1 class="uk-text-uppercase uk-text-emphasis uk-text-bolder"><span
+                    class="uk-text-background uk-background-secondary">Citizen Master</span></h1>
+                    
+            <p class="uk-text-emphasis uk-text-bold"><span class="uk-text-background uk-background-secondary">Find your
+                    next travel destinations city scores and nearby events</span></p>
+        </div>
+
+
         <!--Events go here and need to be dynamically generated.-->
         <section class="uk-flex uk-flex-column uk-flex-middle">
             <div id="events">
