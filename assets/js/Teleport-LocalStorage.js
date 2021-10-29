@@ -14,11 +14,15 @@ let searchBar = document.getElementById("searchBar")
 let searchForm = document.querySelector("form")
 let historyCloseButton = document.getElementById("close-button")
 let searchHistoryValues = document.getElementsByClassName("uk-card-title")
+let heroDiv = document.getElementById("hero")
+let historyTitle = document.getElementById("history-title")
 
 // Created HTML elements
 let containerEl = document.createElement("div");
 let historyContainerEl = document.createElement("div")
 historyContainerEl.setAttribute("id", "ticket-target")
+historyContainerEl.classList.add("uk-margin-remove", "uk-position-z-index")
+
 
 // get items from localStorage, if there are none then create an empy array for future use
 let cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -132,6 +136,7 @@ let displayData = (informationArr) => {
         let scoreBar = document.createElement("progress")
         let dividerIcon = document.createElement("hr")
 
+
         // rounds the score to the nearest whole value
         let scoreRounded = Math.round(informationArr[i].score_out_of_10)
 
@@ -175,10 +180,11 @@ let saveSearch = () => {
 let loadHistory = () => {
     // Gathering all classes with a remove-me attribute to determine if the buttons already exists (helps with duplication)
     let doesExist = document.getElementsByClassName("remove-me")
-    
+
 
     // if there is nothing in localStorage then just return out of this function
     if (cityHistory.length === 0) {
+        historyTitle.textContent = "No History Yet"
         return
     }
 
@@ -196,12 +202,13 @@ let loadHistory = () => {
 
     // Loops through the less than 6 localStorage array and creates buttons
     for (let i = 0; i < cityHistory.length; i++) {
+        historyTitle.textContent = "History"
         // Create Elements
         let containerEl = document.createElement("div")
         let containerTitleEl = document.createElement("h3")
 
         // Modify Elements
-        containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-between")
+        containerEl.classList.add("remove-me", "uk-flex", "uk-flex-row", "uk-flex-around")
         containerTitleEl.classList.add("uk-card-title")
         containerTitleEl.textContent = cityHistory[i]
 
@@ -210,7 +217,7 @@ let loadHistory = () => {
         historyContainerEl.prepend(containerEl)
         searchHistoryContainer.appendChild(historyContainerEl)
     }
-    
+
 }
 
 let toggleHistoryShow = () => {
@@ -221,12 +228,18 @@ let toggleHistoryHide = () => {
     searchBar.classList.add("toggle-hide")
 }
 
+let toggleHeroHide = () => {
+    heroDiv.classList.add("toggle-hide")
+}
+
 
 searchForm.addEventListener("click", toggleHistoryShow)
 historyCloseButton.addEventListener("click", toggleHistoryHide)
 
 historyContainerEl.addEventListener("click", event => {
     event.preventDefault()
+    toggleHistoryHide()
+    toggleHeroHide()
     let cityName = event.target.innerText
     intialCall(cityName)
 })
@@ -235,8 +248,11 @@ historyContainerEl.addEventListener("click", event => {
 // This starts the fetch calls for when the search button is clicked
 searchButton.addEventListener("click", event => {
     event.preventDefault()
+    toggleHistoryHide()
+    toggleHeroHide()
     intialCall()
 })
+
 
 // Display buttons on page upon load if there is localStorage present
 loadHistory()

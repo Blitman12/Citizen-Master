@@ -4,8 +4,7 @@
 An application where you can search for local events in a town using the TicketMaster API as well as statistics on that town (such as safety) using a 0-10 rating scale using the Teleport API.
 
 ## Project Description
-This project was created to help travelers determin important city "scores" focused on: travel, healthcare, commute, cost of living, leisure etc... The user is also able to find nearby events in the selected city. 
-
+This project was created to help travelers determine important city "scores" focused on: travel, healthcare, commute, cost of living, leisure etc... The user is also able to find nearby events in the selected city. 
 
 ## User Story
 ```
@@ -18,12 +17,19 @@ SO THAT I know where to travel to safely to see certain events
 ## Production Link
 [Citizen Master](https://blitman12.github.io/Citizen-Master/)
 
-## contributors
+## Screenshots
+![Screenshot1](assets/images/Screenshot1.JPG)
+![Screenshot2](assets/images/Screenshot2.JPG)
+
+## Acknowledgements
+* Teleport API
+* Ticketmaster API
+* UiKit
+
+## Contributors
 * Bradley Litman
 * Jason Offenbaker
 * David Schwerd 
-
-
 
 ## License
  JavaScript, Code Logic and Styling

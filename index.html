@@ -14,21 +14,27 @@
 <body>
     <!--Primary color here-->
     <header uk-sticky>
-        <!--Search bar and side popout goes here-->
-        <div class="uk-flex uk-flex-center uk-margin-top">
-            <form class="uk-search uk-search-default" type="search">
-                <nav class="uk-navbar-container" uk-navbar>
-                    <div class="uk-navbar-left">
-                        <a href="" uk-search-icon></a>
-                        <input class="uk-search-input" type="search" placeholder="Enter a city">
-                    </div>
-                </nav>
-            </form>
-            <button class="uk-button uk-button-default uk-margin-small-right" id="searchButton" type="button"
-                uk-toggle="target: #offcanvas-usage">Search</button>
 
+        <!--Search bar and side popout goes here-->
+        <div class="uk-flex uk-margin-top search-div uk-flex-center uk-flex-wrap">
+            <a href="index.html">
+                <img src="assets/images/Citizen Master.svg" alt="Citizen Master Logo">
+            </a>
+
+            <div class="uk-flex uk-flex-middle">
+                <form class="uk-search uk-search-default uk-background-primary" type="search">
+                    <nav class="uk-navbar-container">
+                        <div class="">
+                            <a href="" uk-search-icon id="search-icon"></a>
+                            <input class="uk-search-input " type="search" placeholder="Enter a city">
+                        </div>
+                    </nav>
+                </form>
+                <button class="uk-button uk-button-default uk-margin-small-right uk-button-primary" id="searchButton"
+                    type="button" uk-toggle="target: #offcanvas-usage">Search</button>
+            </div>
             <a href="#offcanvas-usage" uk-toggle></a>
-            <div id="offcanvas-usage" uk-offcanvas=>
+            <div id="offcanvas-usage" uk-offcanvas>
                 <div class="uk-offcanvas-bar">
 
                     <button class="uk-offcanvas-close" type="button" uk-close></button>
@@ -43,61 +49,40 @@
         </div>
     </header>
     <main>
+
         <!--Search History should go here-->
         <!--Toggleable when the input is active. Toggle display:none by default-->
-        <section id="searchBar" class="uk-flex uk-flex-center uk-margin-top toggle-hide ">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-4@m uk-padding-top uk-position-absolute"
+        <section id="searchBar" class="uk-flex uk-flex-center toggle-hide uk-margin-remove">
+            <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-width-1-6@m uk-width-1-2 uk-position-absolute uk-margin-remove "
                 id="search-history-container">
+                <span class="uk-position-top-center uk-margin-small-top uk-text-uppercase uk-text-bold" id="history-title">History</span>
+                <hr class="uk-divider-icon">
                 <span uk-icon="icon: close" id="close-button" class="uk-position-top-right"></span>
                 <!-- Dynamically creating search history elements -->
             </div>
         </section>
-        <!--Events go here and need to be dynamically generated.-->
-        <section>
-            <div id="events">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div id='events-panel' class="panel panel-primary">
-                                <div class="panel-heading">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="pager">
-                <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100"
-                    class="uk-flex ul-flex-between uk-flex-column">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div id='events-panel' class="panel panel-primary">
 
-                                    <div class="panel-footer">
-                                        <nav>
-                                            <ul class="pager uk-flex uk-flex-between">
-                                                <div>
-                                                    <li id="prev" class="previous"><a href="#"><span
-                                                                aria-hidden="true">&larr;</span></a></li>
-                                                </div>
-                                                <div>
-                                                    <li id="next" class="next"><a href="#"><span
-                                                                aria-hidden="true">&rarr;</span></a></li>
-                                                </div>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Hero image -->
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column uk-background-cover" id="hero"
+            uk-height-viewport="offset-top: true" data-src="assets/images/hero.jpg" uk-img>
+            <h1 class="uk-text-uppercase uk-text-emphasis uk-text-bolder"><span
+                    class="uk-text-background uk-background-secondary">Citizen Master</span></h1>
+
+            <p class="uk-text-emphasis uk-text-bold"><span class="uk-text-background uk-background-secondary">Find your
+                    next travel destinations city scores and nearby events</span></p>
+        </div>
+
+
+        <!--Events go here and need to be dynamically generated.-->
+        <section class="uk-flex uk-flex-column uk-flex-middle">
+            <div id="events">
+
+            </div>
         </section>
     </main>
     <!--Footer slam this down to the bottom(i would use column mode in flex on the body and then space between? that might do it)-->
     <footer class="uk-card-footer" id="footer">
-        <div class="uk-flex uk-flex-around">
+        <div class="uk-flex uk-flex-between">
             <div>
                 <img alt="Citizen Master Logo/BigText" src="assets/images/favicon-32x32.png" />
             </div>
@@ -112,7 +97,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.6/dist/js/uikit-icons.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="assets/js/teleport.js"></script>
+    <script src="assets/js/Teleport-LocalStorage.js"></script>
     <script src="assets/js/TicketMaster.js"></script>
 </body>
 
